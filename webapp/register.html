@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Disaster Relief Tracker</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav class="site-nav">
+    <a href="index.html" class="brand">
+        <svg class="brand-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 3C11.2 3 6.5 7.7 6.5 13.5C6.5 21 17 31 17 31C17 31 27.5 21 27.5 13.5C27.5 7.7 22.8 3 17 3Z" style="stroke:var(--accent); stroke-width:2.2"/>
+            <circle cx="13.5" cy="13" r="4" style="stroke:var(--accent); stroke-width:2"/>
+            <circle cx="20.5" cy="13" r="4" style="stroke:var(--accent); stroke-width:2"/>
+        </svg>
+        <div class="brand-text">
+            <span class="brand-name">MissingLink</span>
+            <span class="brand-slogan">Together We Find</span>
+        </div>
+    </a>
+</nav>
+
+<div class="auth-shell">
+    <div class="register-box">
+        <h2>Create an account</h2>
+        <p class="subtitle">Sign up to report missing or found persons</p>
+
+        <label for="role">I am a...</label>
+        <select id="role">
+            <option value="REPORTER">Family member / Reporter</option>
+            <option value="VOLUNTEER">Volunteer</option>
+            <option value="RESCUE_TEAM">Rescue team member</option>
+            <option value="POLICE_STATION">Police station</option>
+            <option value="ADMIN">Administrator</option>
+        </select>
+
+        <div id="admin-note">
+            Administrator accounts require approval from an existing admin before you can sign in.
+        </div>
+
+        <label for="fullName">Full name</label>
+        <input type="text" id="fullName" placeholder="Full name" />
+
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Choose a username" />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Choose a password" />
+
+        <label for="contactNumber">Contact number</label>
+        <input type="tel" id="contactNumber" placeholder="e.g. 0771234567" required />
+
+        
+        <div id="fields-REPORTER" class="role-fields active">
+            <label for="relationshipToMissingPerson">Relationship to the person you're reporting</label>
+            <input type="text" id="relationshipToMissingPerson" placeholder="e.g. Daughter, Neighbor" />
+        </div>
+
+        <div id="fields-RESCUE_TEAM" class="role-fields">
+            <label for="unitName">Rescue unit name</label>
+            <input type="text" id="unitName" placeholder="e.g. Southern Rescue Unit" />
+            <label for="assignedZone">Assigned zone</label>
+            <input type="text" id="assignedZone" placeholder="e.g. Ratnapura" />
+        </div>
+
+        <div id="fields-POLICE_STATION" class="role-fields">
+            <label for="stationName">Station name</label>
+            <input type="text" id="stationName" placeholder="e.g. Ratnapura Police Station" />
+            <label for="stationCode">Station code</label>
+            <input type="text" id="stationCode" placeholder="e.g. RTN-01" />
+            <label for="jurisdictionArea">Jurisdiction area</label>
+            <input type="text" id="jurisdictionArea" placeholder="e.g. Ratnapura District" />
+        </div>
+
+        <div id="fields-ADMIN" class="role-fields">
+            <label for="department">Department</label>
+            <input type="text" id="department" placeholder="e.g. IT Operations" />
+        </div>
+
+        <button onclick="register()">Create account</button>
+        <p id="error-message"></p>
+        <p id="success-message"></p>
+
+        <p style="text-align:center; margin-top:16px; font-size:13px;">
+            Already have an account? <a href="login.html">Sign in</a>
+        </p>
+    </div>
+</div>
+
+<script src="js/register.js"></script>
+</body>
+</html>
