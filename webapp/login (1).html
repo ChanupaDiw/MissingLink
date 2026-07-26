@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In - MissingLink</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <nav class="site-nav">
+        <a href="index.html" class="brand">
+            <svg class="brand-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 3C11.2 3 6.5 7.7 6.5 13.5C6.5 21 17 31 17 31C17 31 27.5 21 27.5 13.5C27.5 7.7 22.8 3 17 3Z" style="stroke:var(--accent); stroke-width:2.2"/>
+                <circle cx="13.5" cy="13" r="4" style="stroke:var(--accent); stroke-width:2"/>
+                <circle cx="20.5" cy="13" r="4" style="stroke:var(--accent); stroke-width:2"/>
+            </svg>
+            <div class="brand-text">
+                <span class="brand-name">MissingLink</span>
+                <span class="brand-slogan">Together We Find</span>
+            </div>
+        </a>
+        <div class="home-corner-tabs">
+            <a href="admin-login.html">ADMIN</a>
+            <a href="home.html">HOME</a>
+
+
+        </div>
+    </nav>
+
+    <div class="auth-shell">
+        <div class="login-box">
+            <h2>Sign in</h2>
+
+            <input type="text" id="username" placeholder="Admin username" autocomplete="off" />
+
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Password" autocomplete="off" />
+
+
+            <button onclick="login()">Sign in</button>
+            <p id="error-message"></p>
+
+            <p style="text-align:center; margin-top:16px; font-size:13px;">
+                Administrator? <a href="admin-login.html">Sign in here</a>
+            </p>
+            <p style="text-align:center; margin-top:8px; font-size:13px;">
+                Don't have an account? <a href="register.html">Register here</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>
