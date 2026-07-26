@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report a Person - Disaster Relief Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        #pick-map {
+            height: 300px;
+            margin-top: 10px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="site-nav">
+    <div class="site-nav-top">
+        <a href="index.html" class="brand">
+            <svg class="brand-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 3C11.2 3 6.5 7.7 6.5 13.5C6.5 21 17 31 17 31C17 31 27.5 21 27.5 13.5C27.5 7.7 22.8 3 17 3Z" style="stroke:var(--accent); stroke-width:2.2"/>
+                <circle cx="13.5" cy="13" r="4" style="stroke:var(--accent); stroke-width:2"/>
+                <circle cx="20.5" cy="13" r="4" style="stroke:var(--accent); stroke-width:2"/>
+            </svg>
+            <div class="brand-text">
+                <span class="brand-name">MissingLink</span>
+                <span class="brand-slogan">Together We Find</span>
+            </div>
+        </a>
+
+        <div class="page-title-block">
+            <span class="page-title">Report a Person</span>
+            <span class="page-subtitle">Click the map to set the location, then fill in the details</span>
+        </div>
+
+        <div id="user-bar-container"></div>
+    </div>
+</nav>
+
+<div class="form-container">
+    <label for="type">Report type</label>
+    <select id="type">
+        <option value="LOST">Lost / missing person</option>
+        <option value="FOUND">Found person</option>
+    </select>
+
+    <label for="reportDisasterId">Associated Disaster</label>
+    <select id="reportDisasterId">
+        <option value="">Other (No specific disaster)</option>
+    </select>
+
+    <label for="name">Full name</label>
+    <input type="text" id="name" placeholder="Full name" />
+    <small id="nameError" style="color:#ff8a80; display:none;">Full name is required.</small>
+
+    <label for="age">Age</label>
+    <input type="number" id="age" placeholder="Age" />
+    <small id="ageError" style="color:#ff8a80; display:none;">Please add a valid age.</small>
+
+    <label for="gender">Gender</label>
+    <select id="gender">
+        <option value="">Select gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+    <small id="genderError" style="color:#ff8a80; display:none;">Please select a gender.</small>
+
+    <label for="nicNumber">NIC number (optional)</label>
+    <input type="text" id="nicNumber" placeholder="e.g. 200012345678 or 991234567V" />
+    <small id="nicError" style="color:#ff8a80; display:none;">NIC must be exactly 12 digits, or 9 digits followed by 'V'.</small>
+
+    <label for="description">Physical description</label>
+    <textarea id="description" rows="3" placeholder="Clothing, distinguishing features..."></textarea>
+
+    <label id="extra-label" for="extra">Circumstances</label>
+    <textarea id="extra" rows="2" placeholder="How/when they went missing"></textarea>
+
+    <label for="photoFile">Photo (optional)</label>
+    <input type="file" id="photoFile" accept="image/*" />
+    <img id="photoPreview" style="display:none; max-width:150px; margin-top:8px; border-radius:4px;" />
+    <input type="hidden" id="photoUrl" />
+
+    <label>Location (click on the map below)</label>
+    <div id="pick-map"></div>
+    <small id="locationError" style="color:#ff8a80; display:none;">Please click the map to set a location.</small>
+    <input type="hidden" id="latitude" />
+    <input type="hidden" id="longitude" />
+    <input type="text" id="address" placeholder="Address / area name" style="margin-top:8px;" />
+
+    <button onclick="submitReport()">Submit report</button>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/auth.js"></script>
+<script>
+    requireLogin();
+    renderUserBar();
+</script>
+<script src="js/report.js"></script>
+</body>
+</html>
