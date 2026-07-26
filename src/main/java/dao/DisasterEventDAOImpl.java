@@ -68,6 +68,26 @@ public class DisasterEventDAOImpl implements DisasterEventDAO {
     }
 
     @Override
+    public void update(DisasterEvent event) {
+        String sql = "UPDATE disaster_events SET type = ?, description = ?, latitude = ?, "
+                + "longitude = ?, address = ?, radius_km = ? WHERE disaster_id = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            Location location = event.getLocation();
+            stmt.setString(1, event.getType().name());
+            stmt.setString(2, event.getDescription());
+            stmt.setDouble(3, location.getLatitude());
+            stmt.setDouble(4, location.getLongitude());
+            stmt.setString(5, location.getAddress());
+            stmt.setDouble(6, event.getRadiusKm());
+            stmt.setInt(7, event.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Failed to update disaster event: " + e.getMessage());
+        }
+    }
+
+    @Override
     public void delete(int id) {
         String sql = "DELETE FROM disaster_events WHERE disaster_id = ?";
 
