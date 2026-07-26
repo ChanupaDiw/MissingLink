@@ -73,6 +73,46 @@ public class DisasterEventServlet extends HttpServlet {
         response.getWriter().write("{\"message\":\"Disaster zone registered\"}");
     }
 
+    // PUT /api/disasters  to update an existing disaster
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        String body = readRequestBody(request);
+        Map<String, Object> data = gson.fromJson(body, HashMap.class);
+
+        if (data.get("disasterId") == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"success\":false,\"message\":\"disasterId is required\"}");
+            return;
+        }
+
+        int disasterId = ((Double) data.get("disasterId")).intValue();
+        DisasterEvent existing = disasterEventDAO.findById(disasterId);
+        if (existing == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.getWriter().write("{\"success\":false,\"message\":\"Disaster not found\"}");
+            return;
+        }
+
+        DisasterType type = DisasterType.valueOf(((String) data.get("type")).toUpperCase());
+        double lat = (Double) data.get("latitude");
+        double lng = (Double) data.get("longitude");
+        String address = (String) data.get("address");
+        double radiusKm = (Double) data.get("radiusKm");
+        String description = (String) data.get("description");
+
+        Location location = new Location(lat, lng, address);
+        DisasterEvent event = new DisasterEvent(disasterId, type, description, existing.getDateOccurred(), location, radiusKm);
+
+        disasterEventDAO.update(event);
+
+        response.getWriter().write("{\"success\":true,\"message\":\"Disaster updated successfully\"}");
+    }
+
     private String readRequestBody(HttpServletRequest request) throws IOException {
         StringBuilder buffer = new StringBuilder();
         BufferedReader reader = request.getReader();
